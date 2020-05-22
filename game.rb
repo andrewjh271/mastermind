@@ -1,8 +1,10 @@
 require_relative 'red_white'
+require_relative 'escape_sequences'
 
 class Game
 
   include RedWhite
+  include EscapeSequences
 
   # COLORS[] in indexes 1-6 to match Donald Knuth's convention
   COLORS = [nil, '    '.bg_red, '    '.bg_blue, '    '.bg_green, '    '.bg_magenta,
@@ -50,21 +52,19 @@ class Game
     print COLORS[@code[1]] + " "
     print COLORS[@code[2]] + " "
     puts COLORS[@code[3]] + " "
-    puts
-    print "\e[?25l" # hide cursor
+    hide_cursor
     print "Code will self destruct in ..."
     5.downto(1) do |i|
       print i
       sleep(1)
-      print "\e[1D" # backward - moves 1 character backward
+      move_backward(1)
     end
-    puts "\e[8A" # Moves 8 lines up
-    puts "\e[0J" # Clear screen from cursor to the end
-    print "\e[0J"
+    move_up(8)
+    puts_clear
+    print_clear
     puts "Code has been stored and is now hidden.".italic
-    print "\e[0J"
-    print "\e[?25h" # show cursor
-    puts
+    print_clear
+    show_cursor
   end
 
   def enter_move(move)
@@ -85,9 +85,9 @@ class Game
   end
 
   def clear_move_prompt
-    puts "\e[4A" # Moves 4 lines up
-    puts "\e[0J" # Clear screen from cursor to the end
-    print "\e[0J" # Clear screen from cursor to the end
+    move_up(4)
+    puts_clear
+    print_clear
   end
 
   def reveal_code

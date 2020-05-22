@@ -1,4 +1,8 @@
+require_relative 'escape_sequences'
+
 class Player
+
+  include EscapeSequences
 
   def initialize(game)
     @game = game
@@ -12,8 +16,8 @@ class Player
       @game.enter_move(translate(user_input))
       @game.clear_move_prompt
     else
-      puts "\e[4A" # Moves 3 line up
-      print "\e[0J" # Clear screen from cursor to the end
+      move_up(4)
+      print_clear
       puts "Invalid entry. Please try again.".italic
       move
     end
@@ -26,8 +30,8 @@ class Player
     if translate(user_input)
       @game.code = translate(user_input)
     else
-      puts "\e[4A" # Moves 3 line up
-      print "\e[0J" # Clear screen from cursor to the end
+      move_up(4)
+      print_clear
       puts "Invalid entry. Please try again.".italic
       set_code
     end

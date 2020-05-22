@@ -1,4 +1,9 @@
+require_relative 'escape_sequences'
+
 module User
+
+  include EscapeSequences
+
   def opening_prompt
     puts
     print 'M'.red
@@ -24,22 +29,22 @@ module User
       user_choice = gets.chomp
       case(user_choice.to_i)
       when(1)
-        puts "\e[2A" # Moves 2 line up
+        move_up(2)
         puts "1) Human Codemaker; Human Codebreaker"
         puts
         return ['human', 'human']
       when(2)
-        puts "\e[2A" # Moves 2 line up
+        move_up(2)
         puts "2) Human Codemaker; Computer Codebreaker"
         puts
         return ['human', 'computer']
       when(3)
-        puts "\e[2A" # Moves 2 line up
+        move_up(2)
         puts "3) Computer Codemaker; Human Codebreaker"
         puts
         return ['computer', 'human']
       when(4)
-        puts "\e[2A" # Moves 2 line up
+        move_up(2)
         puts "4) Computer Codemaker; Computer Codebreaker"
         puts
         return ['computer', 'computer']

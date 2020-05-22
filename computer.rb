@@ -1,7 +1,10 @@
 require_relative 'red_white'
+require_relative 'escape_sequences'
 
 class Computer
+
   include RedWhite
+  include EscapeSequences
 
   attr_accessor :game
 
@@ -53,15 +56,15 @@ class Computer
       @last_move = move
       @last_key = game.red_white(move)
       @codes.delete(move)
-      puts "\e[1A" # Moves 1 line up
-      print "\e[0J" # Clear screen from cursor to the end
+      move_up(1)
+      print_clear
       return
     elsif @set.length <= 2
       move = @set[0]
       game.enter_move(move)
       @set.delete(move)
-      puts "\e[1A" # Moves 1 line up
-      print "\e[0J" # Clear screen from cursor to the end
+      move_up(1)
+      print_clear
       return
     end
     print "Calculating" unless @throttle
@@ -99,8 +102,8 @@ class Computer
     @last_key = game.red_white(move)
     game.enter_move(move)
 
-    puts "\e[1A" # Moves 1 line up
-    print "\e[0J" # Clear screen from cursor to the end
+    move_up(1)
+    print_clear
 
   end
 
@@ -111,8 +114,8 @@ class Computer
       move[i] = rand(6) + 1
     end
     game.enter_move(move)
-    puts "\e[1A" # Moves 1 line up
-    print "\e[0J" # Clear screen from cursor to the end
+    move_up(1)
+    print_clear
   end
 
   def calc_countdown(sleep_time=0.06)
