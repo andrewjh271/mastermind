@@ -44,7 +44,7 @@ class Player
   private
 
   def translate(string)
-    
+    return false unless string.length == 4
     string.upcase.split('').map do |char|
       case(char)
       when('R')
