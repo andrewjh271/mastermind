@@ -4,7 +4,8 @@ class Game
 
   include RedWhite
 
-  COLORS = ['0', '    '.bg_red, '    '.bg_blue, '    '.bg_green, '    '.bg_magenta,
+  # COLORS[] in indexes 1-6 to match Donald Knuth's convention
+  COLORS = [nil, '    '.bg_red, '    '.bg_blue, '    '.bg_green, '    '.bg_magenta,
     '    '.bg_cyan, '    '.bg_yellow]
   RED_KEY = '●'.red
   WHITE_KEY = '●'.gray
@@ -57,7 +58,6 @@ class Game
       sleep(1)
       print "\e[1D" # backward - moves 1 character backward
     end
-    
     puts "\e[8A" # Moves 8 lines up
     puts "\e[0J" # Clear screen from cursor to the end
     print "\e[0J"
