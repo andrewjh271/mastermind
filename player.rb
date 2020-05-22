@@ -10,7 +10,10 @@ class Player
     user_input = gets.chomp
     if translate(user_input)
       @game.enter_move(translate(user_input))
+      @game.clear_move_prompt
     else
+      puts "\e[4A" # Moves 3 line up
+      print "\e[0J" # Clear screen from cursor to the end
       puts "Invalid entry. Please try again.".italic
       move
     end
@@ -23,30 +26,37 @@ class Player
     if translate(user_input)
       @game.code = translate(user_input)
     else
+      puts "\e[4A" # Moves 3 line up
+      print "\e[0J" # Clear screen from cursor to the end
       puts "Invalid entry. Please try again.".italic
       set_code
     end
   end
 
+  def failure
+    "You couldn't break the code!"
+  end
+
   private
 
   def translate(string)
+    
     string.upcase.split('').map do |char|
       case(char)
       when('R')
-        0
-      when('B')
         1
-      when('G')
+      when('B')
         2
-      when('M')
+      when('G')
         3
-      when('C')
+      when('M')
         4
-      when('Y')
+      when('C')
         5
+      when('Y')
+        6
       else
-        false
+        return false
       end
     end
   end

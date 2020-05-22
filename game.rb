@@ -51,25 +51,20 @@ class Game
     puts COLORS[@code[3]] + " "
     puts
     print "\e[?25l" # hide cursor
-    print "Code will self destruct in ...5"
-    sleep(1)
-    print "\e[1D" # backward - moves 1 character backward
-    print '4'
-    sleep(1)
-    print "\e[1D"
-    print '3'
-    sleep(1)
-    print "\e[1D"
-    print '2'
-    sleep(1)
-    print "\e[1D"
-    print '1'
-    sleep(1)
-
-    puts "\e[6A" # Moves 5 lines up
-    puts "Code has been stored and is now hidden."
+    print "Code will self destruct in ..."
+    5.downto(1) do |i|
+      print i
+      sleep(1)
+      print "\e[1D" # backward - moves 1 character backward
+    end
+    
+    puts "\e[8A" # Moves 8 lines up
     puts "\e[0J" # Clear screen from cursor to the end
-    puts "\e[?25h" # show cursor
+    print "\e[0J"
+    puts "Code has been stored and is now hidden.".italic
+    print "\e[0J"
+    print "\e[?25h" # show cursor
+    puts
   end
 
   def enter_move(move)
@@ -79,7 +74,6 @@ class Game
     (0..3).each { |i| @key[i] = BLANK }
     (0...red).each { |i| @key[i] = RED_KEY }
     (red...(red + white)).each { |i| @key[i] = WHITE_KEY }
-    puts "Red: #{red} White: #{white}"
   end
 
   def code_broken?
@@ -88,6 +82,26 @@ class Game
 
   def red_white(move)
     super(move, @code)
+  end
+
+  def clear_move_prompt
+    puts "\e[4A" # Moves 4 lines up
+    puts "\e[0J" # Clear screen from cursor to the end
+    print "\e[0J" # Clear screen from cursor to the end
+  end
+
+  def reveal_code
+    puts
+    print "Code:  ".bold
+    print COLORS[@code[0]] + " "
+    print COLORS[@code[1]] + " "
+    print COLORS[@code[2]] + " "
+    puts COLORS[@code[3]] + " "
+    print '       '
+    print COLORS[@code[0]] + " "
+    print COLORS[@code[1]] + " "
+    print COLORS[@code[2]] + " "
+    puts COLORS[@code[3]] + " "
   end
 
 end

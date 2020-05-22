@@ -12,54 +12,66 @@ class Computer
     @game = game
     @mode = mode
     @codes = []
-    @set = []
     6.times do |i|
       6.times do |j|
         6.times do |k|
           6.times do |l|
             @codes << [i + 1, j + 1, k + 1, l + 1]
-            @set << [i + 1, j + 1, k + 1, l + 1]
           end
         end
       end
     end
+    @set = @codes
   end
 
   def move
     @mode == 'knuth' ? move_knuth : move_random
   end
 
-  def random_code
+  def set_code
     code = []
     (0..3).each do |i|
       code[i] = rand(6) + 1
     end
-    code
+    game.code = code
+  end
+
+  def failure
+    "The computer couldn't break the code!"
   end
 
   private
 
   def move_knuth
+    @throttle = @set.length < 200 ? true : false
+    calc_countdown if @throttle
     if !@last_move
+      calc_countdown
       move = [1, 1, 2, 2]
       game.enter_move(move)
       @last_move = move
       @last_key = game.red_white(move)
       @codes.delete(move)
-      @set.delete(move)
+      puts "\e[1A" # Moves 1 line up
+      print "\e[0J" # Clear screen from cursor to the end
       return
     elsif @set.length <= 2
       move = @set[0]
       game.enter_move(move)
       @set.delete(move)
+      puts "\e[1A" # Moves 1 line up
+      print "\e[0J" # Clear screen from cursor to the end
       return
-
     end
-    @set.select! { |pattern| red_white(pattern, @last_move) == @last_key }
+    print "Calculating" unless @throttle
+    # #select! possible, but requires a separate Array created during initialization
+    @set = @set.select { |pattern| red_white(pattern, @last_move) == @last_key }
+    m = 0
     min_scores = @codes.map do |code|
+      m += 1
+      print "." if (!@throttle && (m % 24 == 0))
       KEYS.reduce(1296) do |min_score, key|
         score = @set.count { |pattern| red_white(pattern, code) != key }
-        # binding.pry
         score < min_score ? score : min_score
       end
     end
@@ -85,15 +97,29 @@ class Computer
     @last_move = move
     @last_key = game.red_white(move)
     game.enter_move(move)
+
+    puts "\e[1A" # Moves 1 line up
+    print "\e[0J" # Clear screen from cursor to the end
+
   end
 
   def move_random
-    sleep(1)
-    test_code = []
+    calc_countdown
+    move = []
     (0..3).each do |i|
-      test_code[i] = rand(6)
+      move[i] = rand(6) + 1
     end
-    test_code
+    game.enter_move(move)
+    puts "\e[1A" # Moves 1 line up
+    print "\e[0J" # Clear screen from cursor to the end
   end
-end
 
+  def calc_countdown
+    print 'Calculating'
+    30.times do
+      sleep(0.06)
+      print '.'
+    end
+  end
+
+end
