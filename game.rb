@@ -4,7 +4,7 @@ class Game
 
   include RedWhite
 
-  COLORS = ['    '.bg_red, '    '.bg_blue, '    '.bg_green, '    '.bg_magenta,
+  COLORS = ['0', '    '.bg_red, '    '.bg_blue, '    '.bg_green, '    '.bg_magenta,
     '    '.bg_cyan, '    '.bg_yellow]
   RED_KEY = '●'.red
   WHITE_KEY = '●'.gray
@@ -79,6 +79,7 @@ class Game
     (0..3).each { |i| @key[i] = BLANK }
     (0...red).each { |i| @key[i] = RED_KEY }
     (red...(red + white)).each { |i| @key[i] = WHITE_KEY }
+    puts "Red: #{red} White: #{white}"
   end
 
   def code_broken?

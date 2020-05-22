@@ -3,7 +3,7 @@ module RedWhite
     red = 0
     move.each_with_index { |color, index| red += 1 if color == code[index] }
     white = 0
-    (0..5).each { |i| white += [code.count(i), move.count(i)].min }
+    (1..6).each { |i| white += [code.count(i), move.count(i)].min }
     white -= red
     [red, white]
   end
