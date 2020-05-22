@@ -5,15 +5,17 @@ require_relative 'computer'
 require_relative 'user'
 # require 'pry'
 
-mode = User.opening_prompt
+include User
+
+mode = opening_prompt
 game = Game.new()
 computer = Computer.new(game)
 player = Player.new(game)
 
 # game.code = [3, 6, 3, 2]
-mode[0] == 0 ? player.set_code : computer.set_code
-game.display_code unless mode == [1, 0]
-codemaker = mode[1] == 0 ? player : computer
+mode[0] == 'human' ? player.set_code : computer.set_code
+game.display_code unless mode == ['computer', 'human']
+codemaker = mode[1] == 'human' ? player : computer
 
 # starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 loop do
