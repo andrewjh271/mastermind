@@ -46,7 +46,8 @@ class Computer
     @throttle = @set.length < 200 ? true : false
     calc_countdown if @throttle
     if !@last_move
-      calc_countdown
+      # @set.length = 1296, but move will be immediate
+      calc_countdown(0.04)
       move = [1, 1, 2, 2]
       game.enter_move(move)
       @last_move = move
@@ -114,10 +115,10 @@ class Computer
     print "\e[0J" # Clear screen from cursor to the end
   end
 
-  def calc_countdown
+  def calc_countdown(sleep_time=0.06)
     print 'Calculating'
-    30.times do
-      sleep(0.06)
+    25.times do
+      sleep(sleep_time)
       print '.'
     end
   end
