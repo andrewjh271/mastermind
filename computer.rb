@@ -24,7 +24,7 @@ class Computer
         end
       end
     end
-    @set = @codes
+    @set = @codes.clone
   end
 
   def move
@@ -60,16 +60,14 @@ class Computer
       print_clear
       return
     elsif @set.length <= 2
-      move = @set[0]
+      move = @set.pop
       game.enter_move(move)
-      @set.delete(move)
       move_up(1)
       print_clear
       return
     end
     print "Calculating" unless @throttle
-    # #select! possible, but requires a separate Array created during initialization
-    @set = @set.select { |pattern| red_white(pattern, @last_move) == @last_key }
+    @set.select! { |pattern| red_white(pattern, @last_move) == @last_key }
     m = 0
     min_scores = @codes.map do |code|
       m += 1
@@ -97,7 +95,6 @@ class Computer
     end
 
     @codes.delete(move)
-    @set.delete(move)
     @last_move = move
     @last_key = game.red_white(move)
     game.enter_move(move)
