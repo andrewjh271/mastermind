@@ -73,16 +73,11 @@ class Player
     print 'R'.cyan
     print 'S'.yellow
     print ': '.green
-    print 'Red'.red
-    print ' '
-    print 'Blue'.blue
-    print ' '
-    print 'Green'.green
-    print ' '
-    print 'Magenta'.magenta
-    print ' '
-    print 'Cyan'.cyan
-    print ' '
+    print 'Red '.red
+    print 'Blue '.blue
+    print 'Green '.green
+    print 'Magenta '.magenta
+    print 'Cyan '.cyan
     puts 'Yellow'.yellow
   end
 
