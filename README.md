@@ -2,7 +2,7 @@
 
 Created as part of The Odin Project curriculum.
 
-View on [Github](https://github.com/andrewjh271/mastermind)
+View on [Repl.it](https://mastermind.andrewjh271.repl.run/)
 
 ### Functionality
 
