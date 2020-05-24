@@ -6,6 +6,8 @@ View on [Github](https://github.com/andrewjh271/mastermind)
 
 ### Functionality
 
+*Note: The escape sequences I use to move the cursor and hide lines do not work on the Repl.it sandbox console, but do work on the console-only page. I made a few changes in Repl.it to account for italics and bold text not working. The repo on Github contains the files as they should be.*
+
 Mastermind [rules](https://en.wikipedia.org/wiki/Mastermind_(board_game))
 
 For each move, a red dot will represent a hit of both the correct color and position, and a white dot will represent a hit of the correct color but incorrect position. Duplicate colors are allowed in the four-digit code, but blanks are not.
@@ -17,7 +19,7 @@ The program has four settings:
 3. Computer Codemaker; Human Codebreaker
 4. Computer Codemaker; Computer Codebreaker
 
-The computer uses Donald Knuth's [algorithm](https://www.cs.uni.edu/~wallingf/teaching/cs3530/resources/knuth-mastermind.pdf), which guarantees that the correct code will be found in no more than five moves.
+The computer codebreaker uses Donald Knuth's [algorithm](https://www.cs.uni.edu/~wallingf/teaching/cs3530/resources/knuth-mastermind.pdf), which guarantees that the correct code will be found in no more than five moves. (The computer follows the rules of the game, in that it does not know which colors of the test patterns the red and white keys correspond to.)
 
 ### Thoughts
 
