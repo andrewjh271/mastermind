@@ -53,7 +53,7 @@ class Game
     print COLORS[@code[2]] + " "
     puts COLORS[@code[3]] + " "
     hide_cursor
-    print "Code will self destruct in ..."
+    print "Code will be hidden in ..."
     5.downto(1) do |i|
       print i
       sleep(1)

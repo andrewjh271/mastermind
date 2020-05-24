@@ -12,7 +12,6 @@ module User
     print 'T'.magenta
     print 'E'.cyan
     print 'R'.yellow
-    print 'M'.green
     print 'M'.red
     print 'I'.blue
     print 'N'.green
