@@ -9,4 +9,3 @@ module RedWhite
     # white = (1..6).sum { |i| [move.count(i), code.count(i)].min } - red
   end
 end
-

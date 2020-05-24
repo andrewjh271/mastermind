@@ -8,10 +8,10 @@ class Game
 
   # COLORS[] in indexes 1-6 to match Donald Knuth's convention
   COLORS = [nil, '    '.bg_red, '    '.bg_blue, '    '.bg_green, '    '.bg_magenta,
-    '    '.bg_cyan, '    '.bg_yellow]
-  RED_KEY = '●'.red
-  WHITE_KEY = '●'.gray
-  BLANK = ' '
+    '    '.bg_cyan, '    '.bg_yellow].freeze
+  RED_KEY = '●'.red.freeze
+  WHITE_KEY = '●'.gray.freeze
+  BLANK = ' '.freeze
 
   attr_writer :code
   attr_reader :round
@@ -22,7 +22,7 @@ class Game
     @code = []
   end
 
-  def display()
+  def display
     puts
     print "Round #{@round}  ".bold
     print ' ' if @round < 10
@@ -103,5 +103,4 @@ class Game
     print COLORS[@code[2]] + " "
     puts COLORS[@code[3]] + " "
   end
-
 end

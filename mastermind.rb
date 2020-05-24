@@ -8,7 +8,7 @@ require_relative 'user'
 include User
 
 mode = opening_prompt
-game = Game.new()
+game = Game.new
 computer = Computer.new(game)
 player = Player.new(game)
 
@@ -21,10 +21,10 @@ codemaker = mode[1] == 'human' ? player : computer
 loop do
   codemaker.move
   game.display
-  if(game.code_broken?)
+  if game.code_broken?
     puts "Code was broken!"
     break
-  elsif(game.round == 12)
+  elsif game.round == 12
     puts codemaker.failure
     game.reveal_code
     break

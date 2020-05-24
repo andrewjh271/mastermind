@@ -45,19 +45,20 @@ class Player
 
   def translate(string)
     return false unless string.length == 4
+
     string.upcase.split('').map do |char|
-      case(char)
-      when('R')
+      case char
+      when 'R'
         1
-      when('B')
+      when 'B'
         2
-      when('G')
+      when 'G'
         3
-      when('M')
+      when 'M'
         4
-      when('C')
+      when 'C'
         5
-      when('Y')
+      when 'Y'
         6
       else
         return false
@@ -80,5 +81,4 @@ class Player
     print 'Cyan '.cyan
     puts 'Yellow'.yellow
   end
-
 end

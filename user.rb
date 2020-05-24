@@ -26,31 +26,31 @@ module User
       puts "                                  4) Computer Codemaker; Computer Codebreaker"
       puts
       user_choice = gets.chomp
-      case(user_choice.to_i)
-      when(1)
+      case user_choice.to_i
+      when 1
         move_up(2)
         puts "1) Human Codemaker; Human Codebreaker"
         puts
-        return ['human', 'human']
-      when(2)
+        ['human', 'human']
+      when 2
         move_up(2)
         puts "2) Human Codemaker; Computer Codebreaker"
         puts
-        return ['human', 'computer']
-      when(3)
+        ['human', 'computer']
+      when 3
         move_up(2)
         puts "3) Computer Codemaker; Human Codebreaker"
         puts
-        return ['computer', 'human']
-      when(4)
+        ['computer', 'human']
+      when 4
         move_up(2)
         puts "4) Computer Codemaker; Computer Codebreaker"
         puts
-        return ['computer', 'computer']
+        ['computer', 'computer']
       else
         raise "Invalid input: #{user_choice}".italic
       end
-    rescue StandardError=>e
+    rescue StandardError => e
       puts e
       retry
     end

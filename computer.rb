@@ -8,10 +8,10 @@ class Computer
 
   attr_accessor :game
 
-  KEYS = [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 1], 
-    [1, 2], [1, 3],[2, 0], [2, 1], [2, 2], [3, 0], [4, 0]]
+  KEYS = [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 1],
+          [1, 2], [1, 3], [2, 0], [2, 1], [2, 2], [3, 0], [4, 0]].freeze
 
-  def initialize(game, mode='knuth')
+  def initialize(game, mode = 'knuth')
     @game = game
     @mode = mode
     @codes = []
@@ -34,7 +34,7 @@ class Computer
   def set_code
     code = []
     (0..3).each do |i|
-      code[i] = rand(6) + 1
+      code[i] = rand(1..6)
     end
     game.code = code
   end
@@ -46,7 +46,7 @@ class Computer
   private
 
   def move_knuth
-    @throttle = @set.length < 200 ? true : false
+    @throttle = @set.length < 200
     calc_countdown if @throttle
     if !@last_move
       # @set.length = 1296, but move will be immediate
@@ -71,7 +71,7 @@ class Computer
     m = 0
     min_scores = @codes.map do |code|
       m += 1
-      print "." if (!@throttle && (m % 24 == 0))
+      print "." if !@throttle && (m % 24).zero?
       KEYS.reduce(1296) do |min_score, key|
         score = @set.count { |pattern| red_white(pattern, code) != key }
         score < min_score ? score : min_score
@@ -101,26 +101,24 @@ class Computer
 
     move_up(1)
     print_clear
-
   end
 
   def move_random
     calc_countdown
     move = []
     (0..3).each do |i|
-      move[i] = rand(6) + 1
+      move[i] = rand(1..6)
     end
     game.enter_move(move)
     move_up(1)
     print_clear
   end
 
-  def calc_countdown(sleep_time=0.06)
+  def calc_countdown(sleep_time = 0.06)
     print 'Calculating'
     25.times do
       sleep(sleep_time)
       print '.'
     end
   end
-
 end
