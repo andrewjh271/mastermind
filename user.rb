@@ -56,7 +56,7 @@ module User
         raise "Invalid input: #{user_choice}".italic
       end
     rescue StandardError => e
-      puts e.red
+      puts "#{e}".red
       retry
     end
   end
