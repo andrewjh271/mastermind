@@ -65,7 +65,7 @@ module User
     clear
     move_up(150)
     hide_cursor
-    puts
+    
 
     instructions = <<~INSTRUCTIONS
     Mastermind is a code-breaking game between two players. The codemaker sets
@@ -74,14 +74,16 @@ module User
     blanks are not. The codebreaker then has twelve moves to find the code.
     After each move, one #{Game::RED_KEY} is displayed for each correct color in the
     correct position, and one #{Game::WHITE_KEY} is displayed for each correct color in the
-    incorrect position. A sample game:
+    incorrect position. Press any key to begin a sample game.
     INSTRUCTIONS
-
     puts instructions
+    STDIN.getch
     puts
     sample_game
     puts
-    print "Press any key to exit."
+    puts "The code was broken!".cyan
+    puts
+    puts "Press any key to exit."
     STDIN.getch
     clear
     move_up(150)
@@ -94,25 +96,26 @@ module User
     game = Game.new
     game.code = [5, 2, 5, 3]
     game.reveal_code
+    sleep(1)
     puts
     game.enter_move([1, 4, 1, 4])
     game.display
+    sleep(1)
     game.enter_move([2, 2, 6, 6])
     game.display
-    game.enter_move([2, 3, 4, 5])
-    game.display
+    sleep(1)
     game.enter_move([5, 3, 3, 6])
     game.display
+    sleep(1)
     game.enter_move([1, 3, 6, 1])
     game.display
-    game.enter_move([1, 2, 3, 3])
-    game.display
+    sleep(1)
     game.enter_move([2, 5, 2, 5])
     game.display
-    game.enter_move([2, 3, 5, 5])
-    game.display
+    sleep(1)
     game.enter_move([5, 2, 3, 5])
     game.display
+    sleep(1)
     game.enter_move([5, 2, 5, 3])
     game.display
   end
