@@ -42,7 +42,7 @@ class Game
 
   def display_code
     puts
-    print "Code:  ".bold
+    print "Code   ".bold
     print COLORS[@code[0]] + " "
     print COLORS[@code[1]] + " "
     print COLORS[@code[2]] + " "
@@ -92,12 +92,12 @@ class Game
 
   def reveal_code
     puts
-    print "Code:  ".bold
+    print "Code      ".bold
     print COLORS[@code[0]] + " "
     print COLORS[@code[1]] + " "
     print COLORS[@code[2]] + " "
     puts COLORS[@code[3]] + " "
-    print '       '
+    print '          '
     print COLORS[@code[0]] + " "
     print COLORS[@code[1]] + " "
     print COLORS[@code[2]] + " "

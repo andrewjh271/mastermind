@@ -8,6 +8,10 @@ require_relative 'user'
 include User
 
 mode = opening_prompt
+until mode != 'instructions'
+  display_instructions
+  mode = opening_prompt
+end
 game = Game.new
 computer = Computer.new(game)
 player = Player.new(game)
