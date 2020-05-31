@@ -67,6 +67,32 @@ class Game
     show_cursor
   end
 
+  def display_generation
+    hide_cursor
+    move_up(2)
+    40.times do
+      print "Generating code...  ".italic
+      random_code = []
+      (0..3).each do |i|
+        random_code[i] = rand(1..6)
+      end
+      print COLORS[random_code[0]] + " "
+      print COLORS[random_code[1]] + " "
+      print COLORS[random_code[2]] + " "
+      puts COLORS[random_code[3]] + " "
+      print '                    '
+      print COLORS[random_code[0]] + " "
+      print COLORS[random_code[1]] + " "
+      print COLORS[random_code[2]] + " "
+      print COLORS[random_code[3]] + " "
+      sleep(0.15)
+      move_up(2)
+    end
+    print_clear
+    puts "Code has been stored and hidden.".italic
+    show_cursor
+  end
+
   def enter_move(move)
     @round += 1
     @pattern = move

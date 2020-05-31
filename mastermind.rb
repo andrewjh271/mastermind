@@ -18,7 +18,7 @@ player = Player.new(game)
 
 # game.code = [3, 6, 3, 2]
 mode[0] == 'human' ? player.set_code : computer.set_code
-game.display_code unless mode == ['computer', 'human']
+mode == ['computer', 'human'] ? game.display_generation : game.display_code
 codemaker = mode[1] == 'human' ? player : computer
 
 # starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
