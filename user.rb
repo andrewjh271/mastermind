@@ -51,7 +51,8 @@ module User
         puts
         ['computer', 'computer']
       when 5
-        'instructions'
+        display_instructions
+        opening_prompt
       else
         raise "Invalid input: #{user_choice}".italic
       end
@@ -70,7 +71,7 @@ module User
     instructions = <<~INSTRUCTIONS
     Mastermind is a code-breaking game between two players. The codemaker sets
     a code of four colors comprising any combination of the available six —
-    #{'Red'.red}, #{'Blue'.blue}, #{'Green'.green}, #{'Magenta'.magenta}, #{'Cyan'.cyan}, or #{'Yellow'.yellow}. Duplicate colors are allowed;
+    #{'Red'.red}, #{'Blue'.blue}, #{'Green'.green}, #{'Magenta'.magenta}, #{'Cyan'.cyan}, and #{'Yellow'.yellow}. Duplicate colors are allowed;
     blanks are not. The codebreaker then has twelve moves to find the code.
     After each move, one #{Game::RED_KEY} is displayed for each correct color in the
     correct position, and one #{Game::WHITE_KEY} is displayed for each correct color in the
